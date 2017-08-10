@@ -3,38 +3,50 @@
 
 #include <EmonLib.h>
 
+    float  compressorCurrent; 
+    float  fanCurrent;                    //pF
+    float  returnAirTemp;               //tR
+    float  dischargeAirTemp;            //tD
+    float  returnAirHumidity;           //rhR
+    float  dischargeAirHumidity;        //rhD
+    float  suctionTemp;                 //  temp at inlet to compressor
+    float  compressionTemp;             //  temp at outlet of compressor
+    float  condensorTemp;               //  temp at outlet of condensor
+    float  expansionTemp;   
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
 }
 
 void loop() {
-    
-    // put your main code here, to run repeatedly:
-    float CompInletTemp = random(-210,-190)/10.0;         //Compressor inlet suction temp
-    float CompOutletTemp = random(1760,1830)/10.0;        //compressor outlet temp
-    float CondOutletTemp = random(980,1020)/10.0;        //Condenser outlet temp
-    float ExpansionOutletTemp = CompInletTemp + 1;        //Condenser outlet temp
 
-    float ReturnAirTemp = random(690,710)/10.0;        //Condenser outlet temp
-    float DischargeAirTemp = random(-110,-990)/10.0;        //Condenser outlet temp
-
-    float ReturnAirH = random(760,790)/10.0;          //Condenser outlet temp
-    float DischargeAirH = random(550,570)/10.0;        //Condenser outlet temp
-
-        float FanCurrent = random(45,48)/10.0;          //Condenser outlet temp
-    float CompCurrent = random(100,110)/10.0;        //Condenser outlet temp
-            
+    float  compressorCurrent = random(100,110)/10.0;             
+    float  fanCurrent = random(45,48)/10.0;                 
+    float  returnAirTemp = random(690,710)/10.0;              
+    float  dischargeAirTemp = random(-110,-990)/10.0;        
+    float  returnAirHumidity = random(760,790)/10.0;      
+    float  dischargeAirHumidity = random(550,570)/10.0;      
+    float  suctionTemp = random(-210,-190)/10.0;             
+    float  compressionTemp = random(1760,1830)/10.0;         
+    float  condensorTemp = random(980,1020)/10.0;            
+    float  expansionTemp = suctionTemp + 1;
+       
+           
     String msg = "{";
-    msg = msg + "\"CompInletTemp\":"+ CompInletTemp;
-    msg = msg + ",\"CompOutletTemp\":"+ CompOutletTemp;
-    msg = msg + ",\"CondOutletTemp\":"+ CondOutletTemp;
-    msg = msg + ",\"ExpansionOutletTemp\":"+ ExpansionOutletTemp;
-    msg = msg + ",\"ReturnAirTemp\":"+ ReturnAirTemp;
-    msg = msg + ",\"DischargeAirTemp\":"+ DischargeAirTemp;
-        msg = msg + ",\"FanCurrent\":"+ FanCurrent;
-    msg = msg + ",\"CompCurrent\":"+ CompCurrent;
+    //
+    msg = msg + "\"compressorCurrent\":"+ compressorCurrent;
+    msg = msg + ",\"fanCurrent\":"+ fanCurrent;
+    msg = msg + ",\"returnAirTemp\":"+ returnAirTemp;
+    msg = msg + ",\"dischargeAirTemp\":"+ dischargeAirTemp;
+    msg = msg + ",\"returnAirHumidity\":"+ returnAirHumidity;
+    msg = msg + ",\"dischargeAirHumidity\":"+ dischargeAirHumidity;
+    msg = msg + ",\"suctionTemp\":"+ suctionTemp;
+    msg = msg + ",\"compressionTemp\":"+ compressionTemp;
+    msg = msg + ",\"condensorTemp\":"+ condensorTemp;
+    msg = msg + ",\"expansionTemp\":"+ expansionTemp;
+    //
     msg = msg + "}";
     Serial.println(msg);
-    delay(1000);
+    delay(2000);
 }
